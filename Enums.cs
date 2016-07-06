@@ -20,7 +20,7 @@ namespace RitoBot
         public static object[] champions = new object[] { 
             "AATROX", "AHRI", "AKALI", "ALISTAR", "AMUMU", "ANIVIA", "ANNIE", "ASHE", "AZIR", "BARD", "BLITZCRANK", "BRAND", "BRAUM", "CAITLYN", "CASSIOPEIA", "CHOGATH", "CORKI",
 "DARIUS", "DIANA", "MUNDO", "DRAVEN", "ELISE", "EVELYNN", "EZREAL", "FIDDLESTICKS", "FIORA", "FIZZ", "GALIO", "GANGPLANK", "GAREN", "GNAR", "GRAGAS", "GRAVES",
-"HECARIM", "HEIMERDIGER", "IRELIA", "JANNA", "JARVAN", "JAX", "JAYCE", "JINX", "KALISTA", "KARMA", "KARTHUS", "KASSADIN", "KATARINA", "KAYLE", "KENNEN",
+"HECARIM", "HEIMERDINGER", "IRELIA", "JANNA", "JARVAN", "JAX", "JAYCE", "JINX", "KALISTA", "KARMA", "KARTHUS", "KASSADIN", "KATARINA", "KAYLE", "KENNEN",
 "KHAZIX", "KOGMAW", "LEBLANC", "LEESIN", "LEONA", "LISSANDRA", "LUCIAN", "LULU", "LUX", "MALPHITE", "MALZAHAR", "MAOKAI", "MASTERYI", "MISSFORTUNE",
 "MORDEKAISER", "MORGANA", "NAMI", "NASUS", "NAUTILUS", "NIDALEE", "NOCTURNE", "NUNU", "OLAF", "ORIANNA", "PANTHEON", "POPPY", "QUINN", "REKSAI", "RAMMUS",
 "RENEKTON", "RENGAR", "RIVEN", "RUMBLE", "RYZE", "SEJUANI", "SHACO", "SHEN", "SHYVANA", "SINGED", "SION", "SIVIR", "SKARNER", "SONA", "SORAKA", "SWAIN",
@@ -108,7 +108,7 @@ namespace RitoBot
                     return 104;
                 case "HECARIM":
                     return 120;
-                case "HEIMERDIGER":
+                case "HEIMERDINGER":
                     return 74;
                 case "IRELIA":
                     return 39;

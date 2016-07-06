@@ -25,3 +25,12 @@ C:\Users\nongnoobjung\Desktop\Volibot-Garena-master\obj\x86\Release\RitoBot.cspr
 C:\Users\nongnoobjung\Desktop\Volibot-Garena-master\obj\x86\Release\RitoBot.exe
 C:\Users\nongnoobjung\Desktop\Volibot-Garena-master\obj\x86\Release\RitoBot.pdb
 C:\Users\nongnoobjung\Desktop\Volibot-Garena-master\obj\x86\Release\RitoBot.csprojResolveAssemblyReference.cache
+E:\Documents\GitHub\Volibot-Garena\bin\Release\RitoBot.exe.config
+E:\Documents\GitHub\Volibot-Garena\bin\Release\RitoBot.exe
+E:\Documents\GitHub\Volibot-Garena\bin\Release\RitoBot.pdb
+E:\Documents\GitHub\Volibot-Garena\obj\x86\Release\RitoBot.csprojResolveAssemblyReference.cache
+E:\Documents\GitHub\Volibot-Garena\obj\x86\Release\RitoBot.frm_MainWindow.resources
+E:\Documents\GitHub\Volibot-Garena\obj\x86\Release\RitoBot.Properties.Resources.resources
+E:\Documents\GitHub\Volibot-Garena\obj\x86\Release\RitoBot.csproj.GenerateResource.Cache
+E:\Documents\GitHub\Volibot-Garena\obj\x86\Release\RitoBot.exe
+E:\Documents\GitHub\Volibot-Garena\obj\x86\Release\RitoBot.pdb

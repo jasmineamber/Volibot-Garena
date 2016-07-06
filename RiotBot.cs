@@ -83,6 +83,8 @@ namespace RitoBot
         public string region { get; set; }
         public string regionURL;
         public bool QueueFlag;
+        public int currentHour = DateTime.Now.Hour;
+        public string sumName = "";
 
         public RiotBot(string username, string password, string reg, string path, int threadid, QueueTypes QueueType, bool lead)
         {
@@ -178,8 +180,38 @@ namespace RitoBot
 
                                     await connection.SelectSpells(Spell1, Spell2);
 
-                                    await connection.SelectChampion(Enums.championToId(Program.championId));
-                                    this.updateStatus("Champion Pick : " + Program.championId, this.Accountname);
+                                    int indexHero = random.Next(Program.championId2.Count);
+                                    bool repick = true;
+                                    while (repick)
+                                    {
+                                        if (Program.lastPick == -1)
+                                        {
+                                            Program.lastPick = indexHero;
+                                            repick = false;
+                                        }
+                                        else if (Program.lastPick != indexHero)
+                                        {
+                                            Program.lastPick = indexHero;
+                                            repick = false;
+                                        }
+                                        else
+                                        {
+                                            indexHero = random.Next(Program.championId2.Count);
+                                        }
+                                    }
+                                    this.updateStatus("Hero Index : " + indexHero, this.Accountname);
+                                    string hero = Program.championId2[indexHero];
+                                    if (hero == "RANDOM")
+                                    {
+                                        var randAvailableChampsArray = availableChampsArray.Shuffle();
+                                        await connection.SelectChampion(randAvailableChampsArray.First(champ => champ.Owned || champ.FreeToPlay).ChampionId);
+                                        this.updateStatus("Random Champion", this.Accountname);
+                                    }
+                                    else
+                                    {
+                                        await connection.SelectChampion(Enums.championToId(hero));
+                                        this.updateStatus("Champion Pick : " + hero, this.Accountname);
+                                    }
                                     await connection.ChampionSelectCompleted();
                                 }
                                 else if (Program.championId == "RANDOM")
@@ -310,7 +342,8 @@ namespace RitoBot
                 startInfo.FileName = "League of Legends.exe";
                 startInfo.Arguments = "\"8394\" \"LoLLauncher.exe\" \"\" \"" + credentials.ServerIp + " " +
                 credentials.ServerPort + " " + credentials.EncryptionKey + " " + credentials.SummonerId + "\"";
-                updateStatus("Launching League of Legends", Accountname);               
+                updateStatus("Launching League of Legends", Accountname);
+                QueueFlag = false;            
                 new Thread((ThreadStart)(() =>
                 {
                     exeProcess = Process.Start(startInfo);
@@ -489,7 +522,13 @@ namespace RitoBot
                         queueType = actualQueueType;
                     }
 
-
+                    currentHour = DateTime.Now.Hour;
+                    if ((currentHour > Program.stopHour || currentHour == Program.stopHour) && (QueueFlag == false))
+                    {
+                        connection.Disconnect();
+                        updateStatus("Summoner: " + sumName + " is time should to stop.", Accountname);
+                        return;
+                    }
                     matchParams.QueueIds = new Int32[1] { (int)queueType };
                     LoLLauncher.RiotObjects.Platform.Matchmaking.SearchingForMatchNotification m = await connection.AttachToQueue(matchParams);
                     if (m.PlayerJoinFailures == null)
@@ -607,7 +646,7 @@ namespace RitoBot
                     updateStatus("Created Summonername " + summonerName, Accountname);
                 }
                 sumLevel = loginPacket.AllSummonerData.SummonerLevel.Level;
-                string sumName = loginPacket.AllSummonerData.Summoner.Name;
+                sumName = loginPacket.AllSummonerData.Summoner.Name;
                 double sumId = loginPacket.AllSummonerData.Summoner.SumId;
                 rpBalance = loginPacket.RpBalance;
                 if (sumLevel > Program.maxLevel || sumLevel == Program.maxLevel)

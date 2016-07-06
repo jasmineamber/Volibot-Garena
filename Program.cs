@@ -40,8 +40,10 @@ namespace RitoBot
         public static bool replaceConfig =  false;
         public static int connectedAccs = 0;
         public static string championId = "";
-        public static string championId2 = "";
+        public static List<String> championId2 = new List<string>();
+        public static int lastPick = -1;
         public static int maxLevel = 31;
+        public static int stopHour = 24;
         public static bool buyBoost = false;
         public static bool rndSpell = true;
         public static string spell1 = "flash";
@@ -81,6 +83,14 @@ namespace RitoBot
 
             Console.WriteLine(getTimestamp() + "Loading config\\settings.ini");
             loadConfiguration();
+            string herolist = "";
+            foreach (string s in championId2)
+            {
+                herolist = herolist + s + ",";
+            }
+            herolist = herolist.Substring(0, herolist.Count() - 1);
+            Console.WriteLine(getTimestamp() + "HeroList: " + herolist);
+            Console.WriteLine(getTimestamp() + "StopHour: " + stopHour);
             if (replaceConfig)
             {
                 Console.WriteLine(getTimestamp() + "Replacing Config");
@@ -208,7 +218,9 @@ namespace RitoBot
                 LoadGUI = Convert.ToBoolean(iniFile.IniReadValue("General", "LoadGUI"));
                 maxBots = Convert.ToInt32(iniFile.IniReadValue("General", "MaxBots"));
                 maxLevel = Convert.ToInt32(iniFile.IniReadValue("General", "MaxLevel"));
+                stopHour = Convert.ToInt32(iniFile.IniReadValue("General", "StopHour"));
                 championId = iniFile.IniReadValue("General", "ChampionPick").ToUpper();
+                championId2 = new List<string>(iniFile.IniReadValue("General", "ChampionPick2").ToUpper().Split(','));
                 spell1 = iniFile.IniReadValue("General", "Spell1").ToUpper();
                 spell2 = iniFile.IniReadValue("General", "Spell2").ToUpper();
                 rndSpell = Convert.ToBoolean(iniFile.IniReadValue("General", "RndSpell"));
